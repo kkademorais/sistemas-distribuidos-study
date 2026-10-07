@@ -20,8 +20,9 @@ with client_socket as c:
         c.sendall(b'Hello World from Socket')
         while True:
             message = str(input("Mensagem a ser enviada: "))
+            if message.lower() == "sair": break
             c.sendall(message.encode())
             data = c.recv(1024)
-            if not data: break
-        print('Recebido: ', repr(data))
+            print('Recebido: ', data.decode())
+        print("encerrando conexão..")
         c.close()

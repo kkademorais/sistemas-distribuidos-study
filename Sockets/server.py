@@ -33,8 +33,10 @@ with server_socket as s:
         while True:
                 # recv: recebe um buffer de X bytes
             data = conn.recv(1024)
-            if data: print('Dado recebido: ', data)
-            if not data: break  # se não receber = disconectar
-            conn.sendall(data)
+            print('Recebido: ', data.decode())
+            message = str(input("Mensagem a ser enviada: "))
+            if message.lower() == "sair": break  # se não receber = disconectar
+            conn.sendall(message.encode())
+        print("encerrando conexão..")
         conn.close()
     s.close()
